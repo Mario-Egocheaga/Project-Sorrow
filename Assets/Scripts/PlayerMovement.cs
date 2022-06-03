@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+using System.Collections;
+
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
 	[Header("Settings")]
 	[SerializeField] float movementSpeed;
+	[SerializeField] float runmovementSpeed;
 	[SerializeField] float walkmovementSpeed;
 	[SerializeField] float crouchmovementSpeed;
 	[SerializeField] float rotationSpeed = 0.1f;
@@ -31,12 +34,12 @@ public class PlayerMovement : MonoBehaviour
 	//Input System
 	InputAction crouch;
 
-    void Awake()
-    {
+	void Awake()
+	{
 	}
 
 
-    void Start()
+	void Start()
 	{
 		anim = this.GetComponent<Animator>();
 		cam = Camera.main;
@@ -87,33 +90,6 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-	void CrouchMoveAndRotation()
-	{
-		var camera = Camera.main;
-		var forward = cam.transform.forward;
-		var right = cam.transform.right;
-
-		forward.y = 0f;
-		right.y = 0f;
-
-		forward.Normalize();
-		right.Normalize();
-
-		desiredMoveDirection = forward * moveAxis.y + right * moveAxis.x;
-
-		if (blockRotationPlayer == false)
-		{
-			//Camera
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(desiredMoveDirection), rotationSpeed * acceleration);
-			controller.Move(desiredMoveDirection * Time.deltaTime * (crouchmovementSpeed * acceleration));
-		}
-		else
-		{
-			//Strafe
-			controller.Move((transform.forward * moveAxis.y + transform.right * moveAxis.y) * Time.deltaTime * (crouchmovementSpeed * acceleration));
-		}
-	}
-
 	public void LookAt(Vector3 pos)
 	{
 		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(pos), rotationSpeed);
@@ -130,7 +106,32 @@ public class PlayerMovement : MonoBehaviour
 		t.rotation = Quaternion.Slerp(transform.rotation, lookAtRotationOnly_Y, rotationSpeed);
 	}
 
-	void InputMagnitude()
+
+	void CheckCrouch()
+	{ 
+		crawl = !crawl;
+
+		if (crawl)
+		{
+			anim.SetBool("Crawl", true);
+			movementSpeed = crouchmovementSpeed;
+		}
+		else
+		{
+			anim.SetBool("Crawl", false);
+			movementSpeed = walkmovementSpeed;
+		}
+
+
+		IEnumerator CrouchAnimCoroutine(float duration)
+		{
+			yield return new WaitForSeconds(duration);
+
+
+		}
+	}
+
+void InputMagnitude()
 	{
 		//Calculate the Input Magnitude
 		float inputMagnitude = new Vector2(moveAxis.x, moveAxis.y).sqrMagnitude;
@@ -157,18 +158,7 @@ public class PlayerMovement : MonoBehaviour
 
 	public void OnCrouch()
 	{
-		crawl = !crawl;
-
-		if (crawl)
-		{
-			anim.SetBool("Crawl", true);
-			movementSpeed = crouchmovementSpeed;
-		}
-		else
-		{
-			anim.SetBool("Crawl", false);
-			movementSpeed = walkmovementSpeed;
-		}
+		CheckCrouch();
 	}
 
 	#endregion
