@@ -130,6 +130,7 @@ public class PlayerMovement : MonoBehaviour
 			this.acceleration = 0;
 			this.enabled = false;
 			anim.Play("Kneeling Down");
+			anim.Play("Injured Kneeling Down");
 			yield return new WaitForSeconds(duration);
 			this.acceleration = 1;
 			this.enabled = true;
@@ -141,6 +142,7 @@ public class PlayerMovement : MonoBehaviour
 			this.acceleration = 0;
 			this.enabled = false;
 			anim.Play("Standing");
+			anim.Play("Injured Standing");
 			yield return new WaitForSeconds(duration);
 			this.acceleration = 1;
 			this.enabled = true;
