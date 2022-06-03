@@ -114,19 +114,36 @@ public class PlayerMovement : MonoBehaviour
 		if (crawl)
 		{
 			anim.SetBool("Crawl", true);
+			StartCoroutine(CrouchAnimCoroutine(1.5f));
 			movementSpeed = crouchmovementSpeed;
 		}
 		else
 		{
 			anim.SetBool("Crawl", false);
+			StartCoroutine(StandAnimCoroutine(1.05f));
 			movementSpeed = walkmovementSpeed;
 		}
 
 
 		IEnumerator CrouchAnimCoroutine(float duration)
 		{
+			this.acceleration = 0;
+			this.enabled = false;
+			anim.Play("Kneeling Down");
 			yield return new WaitForSeconds(duration);
+			this.acceleration = 1;
+			this.enabled = true;
 
+		}
+
+		IEnumerator StandAnimCoroutine(float duration)
+		{
+			this.acceleration = 0;
+			this.enabled = false;
+			anim.Play("Standing");
+			yield return new WaitForSeconds(duration);
+			this.acceleration = 1;
+			this.enabled = true;
 
 		}
 	}
