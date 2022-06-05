@@ -28,6 +28,7 @@ public class CombatScript : MonoBehaviour
     public enum HardComboState { 
         NONE,
         HARDATTACK_1,
+        HARDATTACK_2,
         HARDKICK_1
     }
 
@@ -63,7 +64,7 @@ public class CombatScript : MonoBehaviour
             case (LightComboState)4:
                 if (!PlayerMovement.crawl)
                 {
-                    anim.SetTrigger("LightKick");
+                    StartCoroutine(StopMovementCoroutine(.5f));
                 }
                 break;
             case (LightComboState)3:
@@ -79,6 +80,18 @@ public class CombatScript : MonoBehaviour
                 current_LightCombo_State = LightComboState.NONE;
                 break;
         }
+
+        IEnumerator StopMovementCoroutine(float duration)
+        {
+            movement.acceleration = 0;
+            movement.enabled = false;
+            anim.SetTrigger("LightKick");
+            yield return new WaitForSeconds(duration);
+            movement.acceleration = 1;
+            movement.enabled = true;
+
+        }
+
     }
 
     void preformHardCombo()
@@ -95,8 +108,14 @@ public class CombatScript : MonoBehaviour
 
         switch (current_HardCombo_State)
         {
+            case (HardComboState)3:
+                if (!PlayerMovement.crawl)
+                {
+                    StartCoroutine(StopMovementCoroutine(.5f));
+                }
+                break;
             case (HardComboState)2:
-                anim.SetTrigger("HardKick");
+                anim.SetTrigger("HardAttack_2");
                 break;
             case (HardComboState)1:
                 anim.SetTrigger("HardAttack");
@@ -104,6 +123,17 @@ public class CombatScript : MonoBehaviour
             default:
                 current_HardCombo_State = HardComboState.NONE;
                 break;
+        }
+
+        IEnumerator StopMovementCoroutine(float duration)
+        {
+            movement.acceleration = 0;
+            movement.enabled = false;
+            anim.SetTrigger("HardKick");
+            yield return new WaitForSeconds(duration);
+            movement.acceleration = 1;
+            movement.enabled = true;
+
         }
     }
 

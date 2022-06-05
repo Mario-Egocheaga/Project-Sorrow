@@ -29,15 +29,7 @@ public class PlayerMovement : MonoBehaviour
 	[SerializeField] bool blockRotationPlayer;
 	private bool isGrounded;
 	public static bool crawl;
-
-
-	//Input System
-	InputAction crouch;
-
-	void Awake()
-	{
-	}
-
+	public static bool isSprinting = false;
 
 	void Start()
 	{
@@ -48,8 +40,6 @@ public class PlayerMovement : MonoBehaviour
 
 	void Update()
 	{
-
-
 		InputMagnitude();
 
 		isGrounded = controller.isGrounded;
@@ -150,7 +140,55 @@ public class PlayerMovement : MonoBehaviour
 		}
 	}
 
-void InputMagnitude()
+
+	void SprintStartCheck()
+	{
+		if (crawl)
+		{
+			anim.SetBool("Crawl", false);
+			StartCoroutine(StandAnimCoroutine(1.05f));
+		}
+		anim.SetBool("Sprint", true);
+		movementSpeed = runmovementSpeed;
+
+		IEnumerator StandAnimCoroutine(float duration)
+		{
+			this.acceleration = 0;
+			this.enabled = false;
+			anim.Play("Standing");
+			anim.Play("Injured Standing");
+			yield return new WaitForSeconds(duration);
+			this.acceleration = 1;
+			this.enabled = true;
+
+		}
+	}
+
+	void SprintEndCheck()
+	{
+		if (crawl)
+		{
+			anim.SetBool("Crawl", true);
+			StartCoroutine(CrouchAnimCoroutine(1.25f));
+		}
+		anim.SetBool("Sprint", false);
+		movementSpeed = walkmovementSpeed;
+
+		IEnumerator CrouchAnimCoroutine(float duration)
+		{
+			this.acceleration = 0;
+			this.enabled = false;
+			anim.Play("Kneeling Down");
+			anim.Play("Injured Kneeling Down");
+			yield return new WaitForSeconds(duration);
+			this.acceleration = 1;
+			this.enabled = true;
+
+		}
+
+	}
+
+	void InputMagnitude()
 	{
 		//Calculate the Input Magnitude
 		float inputMagnitude = new Vector2(moveAxis.x, moveAxis.y).sqrMagnitude;
@@ -178,6 +216,16 @@ void InputMagnitude()
 	public void OnCrouch()
 	{
 		CheckCrouch();
+	}
+
+	public void OnSprintStart()
+	{
+		SprintStartCheck();
+	}
+
+	public void OnSprintEnd()
+	{
+		SprintEndCheck();
 	}
 
 	#endregion
