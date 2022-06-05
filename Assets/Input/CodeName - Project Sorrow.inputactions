@@ -42,7 +42,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Counter",
+                    "name": "HardAttack",
                     "type": "Button",
                     "id": "5196997c-3373-4b17-a1ba-e28dbefb9504",
                     "expectedControlType": "Button",
@@ -266,7 +266,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Gamepad",
-                    "action": "Counter",
+                    "action": "HardAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -277,7 +277,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
-                    "action": "Counter",
+                    "action": "HardAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "12c02fc9-4c33-4eb4-a76c-74e3d7f4c222",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HardAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -288,6 +299,17 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard&Mouse",
+                    "action": "LightAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d738c56f-3537-443d-933d-5bd257b2f17d",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
                     "action": "LightAttack",
                     "isComposite": false,
                     "isPartOfComposite": false

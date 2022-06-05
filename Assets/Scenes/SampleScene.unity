@@ -429,7 +429,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.20844398, y: -0.0000000175707, z: 0.0000000034283483, w: 0.9780343}
+  m_LocalRotation: {x: 0.20844398, y: 0.000000017570695, z: -0.0000000034283474, w: 0.9780343}
   m_LocalPosition: {x: 0, y: 5.4, z: -11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -674,7 +674,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192495021}
-  m_LocalRotation: {x: 0.208444, y: -0.000000016828436, z: 0.0000000035865675, w: 0.9780343}
+  m_LocalRotation: {x: 0.208444, y: 0.00000001682843, z: -0.0000000035865673, w: 0.9780343}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -719,7 +719,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.65694684, y: 1}
+    m_SensorSize: {x: 2.102916, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -734,7 +734,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh21522
+  m_Name: pb_Mesh21526
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1161,7 +1161,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.65694684, y: 1}
+    m_SensorSize: {x: 2.102916, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1376,7 +1376,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727753031}
-  m_LocalRotation: {x: 0.22619946, y: -0.000000016760408, z: 0.0000000038920733, w: 0.97408104}
+  m_LocalRotation: {x: 0.22619946, y: 0.000000016760414, z: -0.0000000038920747, w: 0.97408104}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1421,7 +1421,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.65694684, y: 1}
+    m_SensorSize: {x: 2.102916, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1626,7 +1626,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 0.65694684, y: 1}
+    m_SensorSize: {x: 2.102916, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -2732,7 +2732,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 7274b74407cff7d4397e8e4d0f654b5b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 

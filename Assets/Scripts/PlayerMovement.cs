@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
 	[Header("Booleans")]
 	[SerializeField] bool blockRotationPlayer;
 	private bool isGrounded;
-	private bool crawl;
+	public static bool crawl;
 
 
 	//Input System

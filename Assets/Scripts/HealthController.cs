@@ -47,8 +47,6 @@ public class HealthController : MonoBehaviour
                 ref layerWeightVelocity,
                 0.2f)
             );
-
-        Debug.Log(healthPercentage);
     }
 
     public void OnTest()
