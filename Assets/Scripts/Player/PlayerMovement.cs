@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour
 	private bool isGrounded;
 	public static bool crawl;
 	public static bool isSprinting = false;
+	private bool isSprintingKeyPressed = false;
 
 	void Start()
 	{
@@ -51,6 +52,12 @@ public class PlayerMovement : MonoBehaviour
 
 		moveVector = new Vector3(0, verticalVel * fallSpeed * Time.deltaTime, 0);
 		controller.Move(moveVector);
+
+		if (!isSprinting && !crawl)
+		{
+			SprintEndCheck();
+		}
+
 	}
 
 	void PlayerMoveAndRotation()
@@ -143,6 +150,8 @@ public class PlayerMovement : MonoBehaviour
 
 	void SprintStartCheck()
 	{
+		isSprinting = true;
+
 		if (crawl)
 		{
 			anim.SetBool("Crawl", false);
@@ -203,6 +212,21 @@ public class PlayerMovement : MonoBehaviour
 		{
 			anim.SetFloat("InputMagnitude", inputMagnitude * acceleration, .1f, Time.deltaTime);
 		}
+
+		if (moveAxis.x == 0f && moveAxis.y == 0f && inputMagnitude < .1f && isSprintingKeyPressed && !crawl)
+		{
+			isSprinting = false;
+		}
+		else if(isSprintingKeyPressed && !crawl)
+		{
+			SprintStartCheck();
+		}
+
+		if (isSprintingKeyPressed && crawl && anim.GetBool("Sprint") == true)
+		{
+			crawl = false;
+		}
+
 	}
 
 	#region Input
@@ -220,11 +244,13 @@ public class PlayerMovement : MonoBehaviour
 
 	public void OnSprintStart()
 	{
-		SprintStartCheck();
+		isSprintingKeyPressed = true;
+		SprintStartCheck();			
 	}
 
 	public void OnSprintEnd()
 	{
+		isSprintingKeyPressed = false;
 		SprintEndCheck();
 	}
 
