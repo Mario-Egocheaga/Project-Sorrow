@@ -13,7 +13,7 @@ public class IdleState : EnemyAIStates
     {
         Patroling();
 
-        if (aiManager.playerInSightRange && !aiManager.playerInAttackRange)
+        if (aiManager.playerInSightRange && !aiManager.playerInAttackRange && aiManager.fov.visibleTarget != null)
         {
             return chaseState;
         }
@@ -22,10 +22,12 @@ public class IdleState : EnemyAIStates
             Debug.Log("Idle");
             return this;
         }
+   
     }
 
     private void Patroling()
     {
+        //Does Not Have Predictable Pattern
         if (!aiManager.walkPointSet) SearchWalkPoint();
 
         if (aiManager.walkPointSet)
@@ -36,6 +38,17 @@ public class IdleState : EnemyAIStates
         //Walkpoint reached
         if (distanceToWalkPoint.magnitude < 1f)
             aiManager.walkPointSet = false;
+
+        //Has Predictable Pattern
+        if (aiManager.hasPatrolPattern)
+        {
+            aiManager.agent.destination = aiManager.waypoints[aiManager.nextWaypoint].position;
+            //aiManager.agent.Resume();
+            if (aiManager.agent.remainingDistance <= aiManager.agent.stoppingDistance && !aiManager.agent.pathPending)
+            {
+                aiManager.nextWaypoint = (aiManager.nextWaypoint + 1) % aiManager.waypoints.Count;
+            }
+        }
     }
 
     private void SearchWalkPoint()

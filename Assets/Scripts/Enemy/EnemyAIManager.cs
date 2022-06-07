@@ -11,23 +11,37 @@ public class EnemyAIManager : MonoBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
+    public FieldOfView fov;
+
     //Patroling
+    [Header("Patrol Variables")]
     public Vector3 walkPoint;
     public bool walkPointSet;
     public float walkPointRange;
 
+    public Vector3 lastKnownTargetPosition;
+
+    [Header("Patrol Set Path")]
+    public bool hasPatrolPattern;
+    public List<Transform> waypoints;
+    public int nextWaypoint;
+
     //Attacking
+    [Header("Attacking Variables")]
     public float timeBetweenAttacks;
     public bool alreadyAttacked;
 
     //States
+    [Header("State Variables")]
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
+
 
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        fov = GetComponent<FieldOfView>();
     }
 
     private void Update()
@@ -36,4 +50,13 @@ public class EnemyAIManager : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
     }
+    /*
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
+    }
+    */
 }

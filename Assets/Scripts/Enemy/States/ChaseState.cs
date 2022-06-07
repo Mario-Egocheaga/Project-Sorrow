@@ -16,11 +16,11 @@ public class ChaseState : EnemyAIStates
     {
         ChasePlayer();
 
-        if (!aiManager.playerInSightRange && !aiManager.playerInAttackRange)
+        if (!aiManager.playerInSightRange && !aiManager.playerInAttackRange && aiManager.fov == null)
         {
             return idleState;
         }
-        else if (aiManager.playerInAttackRange && aiManager.playerInSightRange)
+        else if (aiManager.playerInAttackRange && aiManager.playerInSightRange && aiManager.fov.visibleTarget != null)
         {
             return attackState;
         }
@@ -34,7 +34,19 @@ public class ChaseState : EnemyAIStates
 
     private void ChasePlayer()
     {
-        aiManager.agent.SetDestination(aiManager.player.position);
+        if (aiManager.fov == null) return;
+        if (aiManager.fov.visibleTarget != null)
+        {
+            aiManager.agent.destination = aiManager.player.position;
+            aiManager.lastKnownTargetPosition = aiManager.player.position;
+            aiManager.agent.Resume();
+        }
+        else
+        {
+            aiManager.agent.destination = aiManager.lastKnownTargetPosition;
+        }
+
+        //aiManager.agent.SetDestination(aiManager.player.position);
     }
 
 

@@ -12,7 +12,7 @@ public class AttackState : EnemyAIStates
     {
         //AttackPlayer();
 
-        if (aiManager.playerInSightRange && !aiManager.playerInAttackRange)
+        if (aiManager.playerInSightRange && !aiManager.playerInAttackRange && aiManager.fov.visibleTarget != null)
         {
             return chaseState;
         }
