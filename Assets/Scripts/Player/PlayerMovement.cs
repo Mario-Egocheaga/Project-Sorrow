@@ -31,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
 	public static bool crawl;
 	public static bool isSprinting = false;
 	private bool isSprintingKeyPressed = false;
+	public static bool isHidden;
 
 	void Start()
 	{
@@ -195,6 +196,16 @@ public class PlayerMovement : MonoBehaviour
 
 		}
 
+	}
+
+	public void IsHidden()
+	{
+		isHidden = true;
+	}
+
+	public void isNotHidden()
+	{
+		isHidden = false;
 	}
 
 	void InputMagnitude()

@@ -25,4 +25,5 @@ public class StateManager : MonoBehaviour
     {
         currentState = nextState;  
     }
+
 }

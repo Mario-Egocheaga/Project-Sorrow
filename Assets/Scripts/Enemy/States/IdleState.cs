@@ -13,13 +13,13 @@ public class IdleState : EnemyAIStates
     {
         Patroling();
 
-        if (aiManager.playerInSightRange && !aiManager.playerInAttackRange && aiManager.fov.visibleTarget != null)
+        if (!aiManager.playerInAttackRange && aiManager.fov.visibleTarget != null && !PlayerMovement.isHidden)
         {
             return chaseState;
         }
         else
         {
-            Debug.Log("Idle");
+            aiManager.anim.Play("Walking");
             return this;
         }
    

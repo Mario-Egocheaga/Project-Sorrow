@@ -8,19 +8,23 @@ public class AttackState : EnemyAIStates
 
     public ChaseState chaseState;
 
+    public IdleState idleState;
+
     public override EnemyAIStates RunCurrentState()
     {
-        //AttackPlayer();
+        AttackPlayer();
 
-        if (aiManager.playerInSightRange && !aiManager.playerInAttackRange && aiManager.fov.visibleTarget != null)
+        if (!aiManager.playerInAttackRange && aiManager.fov.visibleTarget != null && !PlayerMovement.isHidden)
         {
             return chaseState;
         }
-
+        else if (aiManager.playerInAttackRange && aiManager.fov.visibleTarget != null && !PlayerMovement.isHidden)
+        {
+            return this;
+        }
         else
         {
-            Debug.Log("Attack");
-            return this;
+            return idleState;
         }
     }
 
@@ -34,6 +38,7 @@ public class AttackState : EnemyAIStates
         if (!aiManager.alreadyAttacked)
         {
             ///Attack code here
+            aiManager.anim.Play("Attack");
             ///End of attack code
 
             aiManager.alreadyAttacked = true;

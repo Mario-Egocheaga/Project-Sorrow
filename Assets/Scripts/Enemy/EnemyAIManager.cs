@@ -13,6 +13,8 @@ public class EnemyAIManager : MonoBehaviour
 
     public FieldOfView fov;
 
+    public Animator anim;
+
     //Patroling
     [Header("Patrol Variables")]
     public Vector3 walkPoint;
@@ -41,6 +43,7 @@ public class EnemyAIManager : MonoBehaviour
     {
         player = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        anim = GetComponent<Animator>();
         fov = GetComponent<FieldOfView>();
     }
 
@@ -50,7 +53,16 @@ public class EnemyAIManager : MonoBehaviour
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
     }
-    /*
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            //Debug.Log("Player Is Touching");
+            PlayerMovement.isHidden = false;
+        }
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -58,5 +70,5 @@ public class EnemyAIManager : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, sightRange);
     }
-    */
+
 }

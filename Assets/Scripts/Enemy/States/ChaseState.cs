@@ -7,7 +7,7 @@ public class ChaseState : EnemyAIStates
 {
     public EnemyAIManager aiManager;
 
-    public IdleState idleState;
+    public SearchState searchState;
 
     public AttackState attackState;
 
@@ -16,17 +16,17 @@ public class ChaseState : EnemyAIStates
     {
         ChasePlayer();
 
-        if (!aiManager.playerInSightRange && !aiManager.playerInAttackRange && aiManager.fov == null)
+        if (!aiManager.playerInAttackRange && aiManager.fov.visibleTarget == null && PlayerMovement.isHidden)
         {
-            return idleState;
+            return searchState;
         }
-        else if (aiManager.playerInAttackRange && aiManager.playerInSightRange && aiManager.fov.visibleTarget != null)
+        else if (aiManager.playerInAttackRange && aiManager.fov.visibleTarget != null && !PlayerMovement.isHidden)
         {
             return attackState;
         }
         else
         {
-            Debug.Log("Chase");
+            aiManager.anim.Play("Running");
             return this;
         }
 
