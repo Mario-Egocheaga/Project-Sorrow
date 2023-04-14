@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class HealthController : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class HealthController : MonoBehaviour
     private int injuredLayerIndex;
     private float layerWeightVelocity;
 
+    public Slider healthSlider;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +33,12 @@ public class HealthController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        healthSlider.value = currentHealth;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            OnTest();
+        }
     }
 
     void InjuredLayerAnim()

@@ -46,7 +46,6 @@ public class ChaseState : EnemyAIStates
             aiManager.agent.destination = aiManager.lastKnownTargetPosition;
         }
 
-        //aiManager.agent.SetDestination(aiManager.player.position);
     }
 
 
