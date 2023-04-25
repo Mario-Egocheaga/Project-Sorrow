@@ -16,10 +16,12 @@ public class EnemyAIManager : MonoBehaviour
     public Animator anim;
 
     //Patroling
-    [Header("Patrol Variables")]
-    public Vector3 walkPoint;
+    //[Header("Patrol Variables")]
+    //public Vector3 walkPoint;
     public bool walkPointSet;
-    public float walkPointRange;
+    //public float walkPointRange;
+
+    public float range;
 
     public Vector3 lastKnownTargetPosition;
 
