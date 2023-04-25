@@ -36,8 +36,8 @@ public class SearchState : EnemyAIStates
 
     void Searching()
     {
-        HasTimeElapsed(15f);
-        if (HasTimeElapsed(15f))
+        HasTimeElapsed(10);
+        if (HasTimeElapsed(10))
         {
             searched = true;
             aiManager.anim.Play("Win");
@@ -45,7 +45,7 @@ public class SearchState : EnemyAIStates
         else
         {
             searched = false;
-            aiManager.anim.Play("Down");
+            aiManager.anim.Play("Look Around");
         }
     }
 

@@ -35,10 +35,10 @@ public class HealthController : MonoBehaviour
     {
         healthSlider.value = currentHealth;
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            OnTest();
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    OnTest();
+        //}
     }
 
     void InjuredLayerAnim()
