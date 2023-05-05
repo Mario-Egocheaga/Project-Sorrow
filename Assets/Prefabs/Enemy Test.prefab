@@ -1347,7 +1347,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aiManager: {fileID: 8577483853409044704}
   patrolState: {fileID: 5888247711348424936}
-  chaseState: {fileID: 0}
+  chaseState: {fileID: 272184798959537992}
   startWaitTime: 4
 --- !u!1 &4728443967777674156
 GameObject:
