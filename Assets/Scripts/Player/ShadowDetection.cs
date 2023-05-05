@@ -143,8 +143,8 @@ namespace ShadowDetection
     {
         [SerializeField]
         private bool _isAuto = true;
-        [SerializeField]
-        private List<Light> _lights;
+        //[SerializeField]
+        public List<Light> _lights;
 
         [SerializeField]
         public int _minimumNbTargetOnShadow = 1;
@@ -174,6 +174,8 @@ namespace ShadowDetection
         public ShadowState IsOnShadow_state = ShadowState.UNDEFINED;
         [HideInInspector]
         public ShadowState Last_IsOnShadow_state = ShadowState.UNDEFINED;
+
+        public LightGeneration lightsSpawned;
 
         public List<Light> Lights
         {

@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public float timer;
     public string levelName;
 
+    public static int levelNum = 0;
+    public static int enemiesSpawned = 1;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -17,7 +20,11 @@ public class GameManager : MonoBehaviour
     IEnumerator nextLevel(float timer)
     {
         yield return new WaitForSeconds(timer);
-
+        levelNum++;
+        if (levelNum % 5 == 0)
+        {
+            enemiesSpawned++;
+        }
         SceneManager.LoadScene(levelName);
     }
 

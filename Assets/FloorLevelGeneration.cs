@@ -58,7 +58,6 @@ public class FloorLevelGeneration : MonoBehaviour
                         wall.transform.parent = parent.transform;
                     }
                 }
-                /*
                 else
                 {
                     // Generate floor
@@ -66,7 +65,6 @@ public class FloorLevelGeneration : MonoBehaviour
                     floor.transform.parent = parent.transform;
                     
                 }
-                */
             }
         }
     }

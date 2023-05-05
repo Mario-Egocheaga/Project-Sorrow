@@ -21,6 +21,7 @@ public class GridLevelGenerator : MonoBehaviour
     {
         parent = this.transform;
         GenerateLevel();
+        ChangeTransform();
     }
 
     void GenerateLevel()
@@ -53,11 +54,8 @@ public class GridLevelGenerator : MonoBehaviour
         }
     }
 
-    private Vector3 GetRandomRots(Vector3 currentRot)
+    void ChangeTransform()
     {
-        float x = ranX ? Random.Range(0f, 360f) : currentRot.x;
-        float y = ranY ? Random.Range(0f, 360f) : currentRot.y;
-
-        return new Vector3(x, y, this.transform.position.z);
+        parent.transform.position = new Vector3(this.transform.position.x - 2 , 0, this.transform.position.z - 2);
     }
 }
