@@ -40,10 +40,12 @@ public class EnemyAIManager : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    HealthController playerHealth;
 
     private void Awake()
     {
         player = GameObject.Find("Player").transform;
+        playerHealth = GameObject.Find("Player").GetComponent<HealthController>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         fov = GetComponent<FieldOfView>();
@@ -54,6 +56,12 @@ public class EnemyAIManager : MonoBehaviour
         //Check for sight and attack range
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+        if (playerInAttackRange && !alreadyAttacked)
+        {
+            playerHealth.OnTest();
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)

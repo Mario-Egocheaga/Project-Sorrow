@@ -51,15 +51,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Test",
-                    "type": "Button",
-                    "id": "450f9ad0-4375-40f1-b7b0-b97a84e250f3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "SprintStart",
                     "type": "Button",
                     "id": "9cdb6c8f-1474-4f11-b36b-f5773cf90738",
@@ -75,6 +66,15 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "Press(behavior=1)",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Test",
+                    "type": "Button",
+                    "id": "3324c89a-9613-4c71-8df5-913401d211ee",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
                     "initialStateCheck": false
                 }
             ],
@@ -334,17 +334,6 @@
                 },
                 {
                     "name": "",
-                    "id": "3b58dfe8-8881-4d6c-aad5-0650018272b4",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard&Mouse",
-                    "action": "Test",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "072b1cea-9f74-499d-903f-d4e33e06cf19",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "",
@@ -362,6 +351,17 @@
                     "processors": "",
                     "groups": "Keyboard&Mouse",
                     "action": "SprintEnd",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5346bc01-04d4-42d6-a8c7-0056e348e9bb",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "Test",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

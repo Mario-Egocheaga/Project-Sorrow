@@ -7,81 +7,68 @@ public class IdleState : EnemyAIStates
 {
     public EnemyAIManager aiManager;
 
+    public PatrolState patrolState;
+
     public ChaseState chaseState;
+
+    float m_WaitTime;
+    public float startWaitTime = 3;
 
     public override EnemyAIStates RunCurrentState()
     {
-        Patroling();
+        Idle();
 
-        if (!aiManager.playerInAttackRange && aiManager.fov.visibleTarget != null && !PlayerMovement.isHidden)
+        if (!aiManager.playerInAttackRange && aiManager.fov.visibleTarget == null && PlayerMovement.isHidden)
+        {
+            return patrolState;
+        }
+        else if (!aiManager.playerInAttackRange && aiManager.fov.visibleTarget != null && !PlayerMovement.isHidden)
         {
             return chaseState;
         }
         else
         {
-            aiManager.anim.Play("Walking");
             return this;
         }
    
     }
 
 
-    private void Patroling()
+    private void Idle()
     {
-        if (aiManager.agent.remainingDistance <= aiManager.agent.stoppingDistance) //done with path
+        if (m_WaitTime <= 0)
         {
-            Vector3 point;
-            if (RandomPoint(transform.position, aiManager.range, out point)) //pass in our centre point and radius of area
-            {
-                Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f); //so you can see with gizmos
-                aiManager.agent.SetDestination(point);
-            }
+            m_WaitTime = startWaitTime;
         }
-        /*
-        //Walkpoint reached
-        if (aiManager.distanceToWalkPoint.magnitude < 1f)
-            aiManager.walkPointSet = false;
-
-        //Has Predictable Pattern
-        if (aiManager.hasPatrolPattern)
+        else
         {
-            aiManager.agent.destination = aiManager.waypoints[aiManager.nextWaypoint].position;
-            //aiManager.agent.Resume();
-            if (aiManager.agent.remainingDistance <= aiManager.agent.stoppingDistance && !aiManager.agent.pathPending)
-            {
-                aiManager.nextWaypoint = (aiManager.nextWaypoint + 1) % aiManager.waypoints.Count;
-            }
+            Stop();
+            m_WaitTime -= Time.deltaTime;
         }
-        */
-
     }
 
-    bool RandomPoint(Vector3 center, float range, out Vector3 result)
+    void Stop()
     {
+        PlayRandomAnim();
+    }
 
-        Vector3 randomPoint = center + Random.insideUnitSphere * range;
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas)) 
+
+    private void PlayRandomAnim()
+    {
+        int ranNum = Random.Range(1, 2);
+        switch (ranNum)
         {
-            result = hit.position;
-            return true;
+
+            case 2:
+                aiManager.anim.Play("Arm Stretching");
+                break;
+            case 1:
+                aiManager.anim.Play("Look Over Shoulder");
+                break;
+            default:
+                aiManager.anim.Play("Look Around");
+                break;
         }
-
-        result = Vector3.zero;
-        return false;
     }
 
-    /*
-    private void SearchWalkPoint()
-    {
-        //Calculate random point in range
-        float randomZ = Random.Range(-aiManager.walkPointRange, aiManager.walkPointRange);
-        float randomX = Random.Range(-aiManager.walkPointRange, aiManager.walkPointRange);
-
-        aiManager.walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-        if (Physics.Raycast(aiManager.walkPoint, -transform.up, 2f, aiManager.whatIsGround))
-            aiManager.walkPointSet = true;
-    }
-    */
 }

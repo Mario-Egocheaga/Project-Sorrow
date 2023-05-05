@@ -8,7 +8,7 @@ public class AttackState : EnemyAIStates
 
     public ChaseState chaseState;
 
-    public IdleState idleState;
+    public PatrolState patrolState;
 
     public override EnemyAIStates RunCurrentState()
     {
@@ -24,7 +24,7 @@ public class AttackState : EnemyAIStates
         }
         else
         {
-            return idleState;
+            return patrolState;
         }
     }
 

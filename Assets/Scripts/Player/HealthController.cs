@@ -22,6 +22,8 @@ public class HealthController : MonoBehaviour
 
     public Slider healthSlider;
 
+    public GameObject gameOverScreen;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,12 +35,10 @@ public class HealthController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        healthSlider.value = currentHealth;
-
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    OnTest();
-        //}
+        if (currentHealth <= 0)
+        {
+            gameOverScreen.SetActive(true);
+        }
     }
 
     void InjuredLayerAnim()
@@ -70,4 +70,5 @@ public class HealthController : MonoBehaviour
 
         InjuredLayerAnim();
     }
+
 }

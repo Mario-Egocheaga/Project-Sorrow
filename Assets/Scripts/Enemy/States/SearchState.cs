@@ -8,11 +8,11 @@ public class SearchState : EnemyAIStates
 
     public StateManager stateManager;
 
-    public IdleState idleState;
+    public PatrolState patrolState;
 
     public ChaseState chaseState;
 
-    private bool searched = false;
+    public bool searched = false;
 
     private float stateTimeElasped;
 
@@ -22,7 +22,7 @@ public class SearchState : EnemyAIStates
 
         if (searched && !aiManager.playerInAttackRange && aiManager.fov.visibleTarget == null && PlayerMovement.isHidden)
         {
-            return idleState;
+            return patrolState;
         }
         else if(aiManager.fov.visibleTarget != null && !PlayerMovement.isHidden)
         {
